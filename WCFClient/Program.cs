@@ -20,14 +20,14 @@ namespace WCFClientConsole
             WCFPorxy client = new WCFPorxy();
             Console.WriteLine("服务已启动");
             var str = "select * from t_class";
-            var ss = client.ExecuteNoQuery(new WCFData { SqlText = "", Param = new Hashtable() });
+            var ss = client.ExecuteNoQuery(new SendData { SqlText = "", Param = new Hashtable() });
             Console.WriteLine("返回为{0}", ss);
             client.Close();
             Console.WriteLine("服务已关闭");
             Console.ReadLine();
         }
     }
-    public class WCFPorxy : WCFClient { }
+    public class WCFPorxy : AgentClient { }
     [Serializable]
     public class TestModel
     {

@@ -7,7 +7,7 @@ namespace TransparentAgent.Interface
         /// <summary>
         ///  获取或设置操作结果类型
         /// </summary>
-        ResultType ResultType { get; set; }
+        Enums ResultType { get; set; }
 
         /// <summary>
         ///  获取或设置操作返回信息
@@ -29,7 +29,7 @@ namespace TransparentAgent.Interface
         /// <summary>
         ///  获取或设置操作结果类型
         /// </summary>
-        ResultType ResultType { get; set; }
+        Enums ResultType { get; set; }
 
         /// <summary>
         ///  获取或设置操作返回信息
