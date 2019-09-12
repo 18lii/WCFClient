@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Data;
+using System.Threading;
 using TransparentAgent.BaseClient;
 using TransparentAgent.Contract;
 using TransparentAgent.Infrastructure;
@@ -10,19 +12,25 @@ namespace WCFClientConsole
     {
         static void Main(string[] args)
         {
-            //var key = "jxkejixu".Encryptogram();
-            //var dKey = key.Decryptogram();
-            //var encrypeStr = ("Data Source=192.168.1.2\\SQL2008;uid=sa;pwd=123456a;database=xfzb;Connect Timeout=30").Encryptogram("jxkejixu");
-            //var decrypeStr = encrypeStr.Decryptogram("jxkejixu");
-            //var model = new TestModel() { Name = "test", Order = 1, IsFinish = true };
-            //var cpr = model.Compression();
-            //var obj = cpr.Decompress<TestModel>();
             WCFPorxy client = new WCFPorxy();
             Console.WriteLine("服务已启动");
-            var str = "select * from t_class";
-
+            var str = "select top 20000 * from v_sell_report";
+            var t1 = DateTime.Now;
             var ss = client.ExecuteReader(new ContractData {UserId = "1", SqlText = new string[1] { str } });
-            Console.WriteLine("返回为{0}", ss);
+            var t2 = DateTime.Now;
+            var result = (DataTable)ss.AppendData;
+            
+            //foreach (var row in result.Select())
+            //{
+            //    foreach (DataColumn item in result.Columns)
+            //    {
+            //        Console.Write(row[item.ColumnName].ToString());
+            //    }
+            //    //Thread.Sleep(200);
+            //    Console.WriteLine();
+            //}
+            Console.WriteLine(ss.Message);
+            Console.WriteLine("开始事件为：{0}，结束事件为：{1}", t1, t2);
             client.Close();
             Console.WriteLine("服务已关闭");
             Console.ReadLine();
