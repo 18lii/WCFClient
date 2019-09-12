@@ -10,41 +10,41 @@ namespace TransparentAgent.Infrastructure
         /// <summary>
         ///     操作成功
         /// </summary>
-        Success,
+        Success = 0,
 
         /// <summary>
         ///     操作取消或操作没引发任何变化
         /// </summary>
-        NoChanged,
+        NoChanged = 1,
 
         /// <summary>
         ///     参数错误
         /// </summary>
-        ParamError,
+        ParamError = 2,
 
         /// <summary>
         ///     指定参数的数据不存在
         /// </summary>
-        QueryNull,
+        QueryNull = 3,
 
         /// <summary>
         ///     权限不足
         /// </summary>
-        PurviewLack,
+        PurviewLack = 4,
 
         /// <summary>
         ///     非法操作
         /// </summary>
-        IllegalOperation,
+        IllegalOperation = 5,
 
         /// <summary>
         ///     警告
         /// </summary>
-        Warning,
+        Warning = 6,
 
         /// <summary>
         ///     操作引发错误
         /// </summary>
-        Error
+        Error = 7
     }
 }

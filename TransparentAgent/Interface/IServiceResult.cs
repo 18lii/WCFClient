@@ -2,12 +2,12 @@
 
 namespace TransparentAgent.Interface
 {
-    public interface IGenericResult
+    public interface IServiceResult
     {
         /// <summary>
         ///  获取或设置操作结果类型
         /// </summary>
-        Enums ResultType { get; set; }
+        ResultType ResultType { get; set; }
 
         /// <summary>
         ///  获取或设置操作返回信息
@@ -24,12 +24,12 @@ namespace TransparentAgent.Interface
         /// </summary>
         object AppendData { get; set; }
     }
-    public interface IGenericResult<T>
+    public interface IServiceResult<T>
     {
         /// <summary>
         ///  获取或设置操作结果类型
         /// </summary>
-        Enums ResultType { get; set; }
+        ResultType ResultType { get; set; }
 
         /// <summary>
         ///  获取或设置操作返回信息

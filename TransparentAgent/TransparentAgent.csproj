@@ -46,11 +46,12 @@
     <Compile Include="BaseClient\AgentClient.cs" />
     <Compile Include="Contract\IService.cs" />
     <Compile Include="Contract\SendData.cs" />
+    <Compile Include="Contract\ServiceResult.cs" />
     <Compile Include="Infrastructure\DESCryptogramExtensions.cs" />
     <Compile Include="Infrastructure\CompressionExtensions.cs" />
     <Compile Include="Infrastructure\Enums.cs" />
     <Compile Include="Interface\IClientBase.cs" />
-    <Compile Include="Interface\IGenericResult.cs" />
+    <Compile Include="Interface\IServiceResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
