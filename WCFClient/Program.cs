@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Data;
 using System.Threading;
+using System.Threading.Tasks;
 using TransparentAgent.BaseClient;
 using TransparentAgent.Contract;
 using TransparentAgent.Infrastructure;
@@ -14,7 +15,7 @@ namespace WCFClientConsole
         {
             WCFPorxy client = new WCFPorxy();
             Console.WriteLine("服务已启动");
-            var str = "select top 5000 * from t_item";
+            var str = "select top 1000 * from t_item";
             DateTime t1Start;
             DateTime t1Finish;
             ////new Thread();
@@ -40,28 +41,37 @@ namespace WCFClientConsole
             //    t2Finish = DateTime.Now;
             //    Console.WriteLine("任务2结束时间：{0}", t2Finish.ToString());
             //});
-            var tList = new Thread[2];
-            for(var i = 0; i < tList.Length; i++)
+            var max = 16;
+            var tList = new Thread[max];
+            var iList = new Tuple<int, object, DateTime>[max];
+            var iSignal = new AutoResetEvent[max];
+            var ids = new Guid[max];
+            Console.ReadLine();
+            Parallel.For(0, iSignal.Length, i =>
             {
-                var t = new Thread(() =>
+                Thread.Sleep(i + 100);
+                iSignal[i] = new AutoResetEvent(false);
+                new Thread(() =>
                 {
-                    var tid = i;
+                    Console.WriteLine("任务{0}开始时间：{1}", i, DateTime.Now.ToString());
                     var ss = client.SelectAsync(new ContractData { SqlText = new string[1] { str }, Param = new Hashtable[1] { new Hashtable() }, sequence = true });
                     var t2 = DateTime.Now;
-                    Thread.Sleep(100);
-                    var result = client.Result(ss);
-                    var num = ((DataTable)result.AppendData).Rows.Count.ToString();
-                    t1Finish = DateTime.Now;
-                    Console.WriteLine("任务{0}结束时间：{1}， 共计：{2}条记录", tid, t1Finish.ToString(), num);
-                });
-                tList[i] = t;
-            }
-            for(var j = 0; j < tList.Length; j++)
+                    ids[i] = ss;
+                    //iSignal[i].Set();
+                })
+                { IsBackground = true }.Start();
+                //iSignal[i].WaitOne();
+                
+            });
+            Thread.Sleep(2000);
+            for(var i = 0; i < ids.Length; i++)
             {
-                var tStart = DateTime.Now;
-                Console.WriteLine("任务{0}开始时间：{1}", j, tStart.ToString());
-                tList[j].Start();
-                Thread.Sleep(1000);
+                var result = client.Result(ids[i]);
+
+                var tb = ((DataTable)result.AppendData);
+                t1Finish = DateTime.Now;
+                iList[i] = new Tuple<int, object, DateTime>(tb.Rows.Count, tb, t1Finish);
+                Console.WriteLine("任务{0}结束时间：{1}， 共计：{2}条记录", i, iList[i].Item3, iList[i].Item1);
             }
             //var result = await client.Result(ss);
             //var tb = result.AppendData as DataTable;
@@ -76,8 +86,8 @@ namespace WCFClientConsole
             //}
             ////Console.WriteLine(ss.Message);
             //Console.WriteLine("开始事件为：{0}，结束事件为：{1}", t1, t2);
-            
-            
+
+
             Console.ReadKey();
             client.Close();
             Console.WriteLine("服务已关闭，按任意键退出......");
