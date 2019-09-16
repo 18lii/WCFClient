@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+using TransparentAgent.Interface;
 
 namespace TransparentAgent.Contract
 {
     [Serializable]
-    public class ContractData
+    public class ContractData : IContractData
     {
-        public string UserId { get; set; }
         public string[] SqlText { get; set; }
         public Hashtable[] Param { get; set; }
         public DataSet[] DataSet { get; set; }
+        public bool sequence { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.ServiceModel;
 using TransparentAgent.Contract;
 using TransparentAgent.Infrastructure;
 using TransparentAgent.Interface;
+using System.Threading.Tasks;
 
 namespace TransparentAgent.BaseClient
 {
@@ -23,7 +24,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult Select(ContractData data)
+        public IServiceResult Select(IContractData data)
         {
             return Channel.Select(data.Compression()).Decompress<IServiceResult>();
         }
@@ -34,9 +35,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult SelectAsync(ContractData data)
+        public Guid SelectAsync(IContractData data)
         {
-            return Channel.SelectAsync(data.Compression()).Decompress<IServiceResult>();
+            return Channel.SelectAsync(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过SQL语句与 <see cref="Hashtable"/>[] 参数进行数据插入，
@@ -44,7 +45,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult Insert(ContractData data)
+        public IServiceResult Insert(IContractData data)
         {
             return Channel.Insert(data.Compression()).Decompress<IServiceResult>();
         }
@@ -55,9 +56,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult InsertAsync(ContractData data)
+        public Guid InsertAsync(IContractData data)
         {
-            return Channel.InsertAsync(data.Compression()).Decompress<IServiceResult>();
+            return Channel.InsertAsync(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过SQL语句与 <see cref="Hashtable"/>[] 参数进行数据更新，SQL文无where部分将导致操作失败，
@@ -65,7 +66,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult Update(ContractData data)
+        public IServiceResult Update(IContractData data)
         {
             return Channel.Update(data.Compression()).Decompress<IServiceResult>();
         }
@@ -76,9 +77,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult UpdateAsync(ContractData data)
+        public Guid UpdateAsync(IContractData data)
         {
-            return Channel.UpdateAsync(data.Compression()).Decompress<IServiceResult>();
+            return Channel.UpdateAsync(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过SQL语句与 <see cref="Hashtable"/>[] 参数进行数据删除，SQL文无where部分将导致操作失败，
@@ -86,7 +87,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult Delete(ContractData data)
+        public IServiceResult Delete(IContractData data)
         {
             return Channel.Delete(data.Compression()).Decompress<IServiceResult>();
         }
@@ -97,9 +98,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult DeleteAsync(ContractData data)
+        public Guid DeleteAsync(IContractData data)
         {
-            return Channel.DeleteAsync(data.Compression()).Decompress<IServiceResult>();
+            return Channel.DeleteAsync(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过SQL语句进行数据查询，
@@ -107,7 +108,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult ExecuteReader(ContractData data)
+        public IServiceResult ExecuteReader(IContractData data)
         {
             return Channel.ExecuteReader(data.Compression()).Decompress<IServiceResult>();
         }
@@ -118,9 +119,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult ExecuteReaderAsync(ContractData data)
+        public Guid ExecuteReaderAsync(IContractData data)
         {
-            return Channel.ExecuteReaderAsync(data.Compression()).Decompress<IServiceResult>();
+            return Channel.ExecuteReaderAsync(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过SQL语句进行数据查询，
@@ -128,7 +129,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult ExecuteScalar(ContractData data)
+        public IServiceResult ExecuteScalar(IContractData data)
         {
             return Channel.ExecuteScalar(data.Compression()).Decompress<IServiceResult>();
         }
@@ -139,9 +140,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult ExecuteScalarAsync(ContractData data)
+        public Guid ExecuteScalarAsync(IContractData data)
         {
-            return Channel.ExecuteScalarAsync(data.Compression()).Decompress<IServiceResult>();
+            return Channel.ExecuteScalarAsync(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过SQL语句进行数据操作，
@@ -149,7 +150,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult ExecuteNoQuery(ContractData data)
+        public IServiceResult ExecuteNoQuery(IContractData data)
         {
             return Channel.ExecuteNoQuery(data.Compression()).Decompress<IServiceResult>();
         }
@@ -160,9 +161,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult ExecuteNoQueryAsync(ContractData data)
+        public Guid ExecuteNoQueryAsync(IContractData data)
         {
-            return Channel.ExecuteNoQueryAsync(data.Compression()).Decompress<IServiceResult>();
+            return Channel.ExecuteNoQueryAsync(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过存储过程名称与 <see cref="Hashtable"/>[] 执行存储过程，
@@ -170,7 +171,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult ExecuteProcedure(ContractData data)
+        public IServiceResult ExecuteProcedure(IContractData data)
         {
             return Channel.ExecuteProcedure(data.Compression()).Decompress<IServiceResult>();
         }
@@ -181,9 +182,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult ExecuteProcedureAsync(ContractData data)
+        public Guid ExecuteProcedureAsync(IContractData data)
         {
-            return Channel.ExecuteProcedureAsync(data.Compression()).Decompress<IServiceResult>();
+            return Channel.ExecuteProcedureAsync(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过SQL语句与数据适配器进行查询，返回结果集，
@@ -191,7 +192,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult AdapterGet(ContractData data)
+        public IServiceResult AdapterGet(IContractData data)
         {
             return Channel.AdapterGet(data.Compression()).Decompress<IServiceResult>();
         }
@@ -202,9 +203,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult AdapterGetAsync(ContractData data)
+        public Guid AdapterGetAsync(IContractData data)
         {
-            return Channel.AdapterGet(data.Compression()).Decompress<IServiceResult>();
+            return Channel.AdapterGet(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 同步方法，通过SQL语句、<see cref="DataSet"/>与数据适配器进行操作，返回受影响的行数，
@@ -212,7 +213,7 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult AdapterSet(ContractData data)
+        public IServiceResult AdapterSet(IContractData data)
         {
             return Channel.AdapterSet(data.Compression()).Decompress<IServiceResult>();
         }
@@ -223,9 +224,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public IServiceResult AdapterSetAsync(ContractData data)
+        public Guid AdapterSetAsync(IContractData data)
         {
-            return Channel.AdapterSet(data.Compression()).Decompress<IServiceResult>();
+            return Channel.AdapterSet(data.Compression()).Decompress<Guid>();
         }
         /// <summary>
         /// 通过<see cref="Guid"/>获取异步操作结果，需等待
@@ -234,7 +235,7 @@ namespace TransparentAgent.BaseClient
         /// <returns></returns>
         public IServiceResult Result(Guid id)
         {
-            return Channel.Delete(id.Compression()).Decompress<IServiceResult>();
+            return Channel.Result(id.Compression()).Decompress<IServiceResult>();
         }
     }
 }

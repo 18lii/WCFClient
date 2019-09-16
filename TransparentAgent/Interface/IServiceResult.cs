@@ -1,5 +1,4 @@
-﻿using TransparentAgent.Infrastructure;
-
+﻿
 namespace TransparentAgent.Interface
 {
     public interface IServiceResult
@@ -7,7 +6,7 @@ namespace TransparentAgent.Interface
         /// <summary>
         ///  获取或设置操作结果类型
         /// </summary>
-        ResultType ResultType { get; set; }
+        bool ResultType { get; set; }
 
         /// <summary>
         ///  获取或设置操作返回信息
@@ -29,7 +28,7 @@ namespace TransparentAgent.Interface
         /// <summary>
         ///  获取或设置操作结果类型
         /// </summary>
-        ResultType ResultType { get; set; }
+        bool ResultType { get; set; }
 
         /// <summary>
         ///  获取或设置操作返回信息

@@ -51,8 +51,10 @@
     <Compile Include="Infrastructure\CompressionExtensions.cs" />
     <Compile Include="Infrastructure\Enums.cs" />
     <Compile Include="Interface\IClientBase.cs" />
+    <Compile Include="Interface\IContractData.cs" />
     <Compile Include="Interface\IServiceResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Web\Security.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

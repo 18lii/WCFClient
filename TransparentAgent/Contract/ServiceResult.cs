@@ -11,30 +11,30 @@ namespace TransparentAgent.Contract
     public class ServiceResult : IServiceResult
     {
         public ServiceResult() { }
-        public ServiceResult(ResultType resultType)
+        public ServiceResult(bool resultType)
         {
             ResultType = resultType;
         }
 
-        public ServiceResult(ResultType resultType, object appendData)
+        public ServiceResult(bool resultType, object appendData)
             : this(resultType)
         {
             AppendData = appendData;
         }
 
-        public ServiceResult(ResultType resultType, string logMessage)
+        public ServiceResult(bool resultType, string logMessage)
             : this(resultType)
         {
             LogMessage = logMessage;
         }
 
-        public ServiceResult(ResultType resultType, string logMessage, object appendData)
+        public ServiceResult(bool resultType, string logMessage, object appendData)
             : this(resultType, logMessage)
         {
             AppendData = appendData;
         }
 
-        public ResultType ResultType { get; set; }
+        public bool ResultType { get; set; }
         public string Message { get; set; }
         public string LogMessage { get; set; }
         public object AppendData { get; set; }
