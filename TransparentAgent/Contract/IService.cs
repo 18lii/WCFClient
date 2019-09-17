@@ -4,10 +4,11 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using TransparentAgent.Interface;
 
 namespace TransparentAgent.Contract
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(ICallback))]
     public interface IService
     {
         /// <summary>
@@ -156,6 +157,6 @@ namespace TransparentAgent.Contract
         /// <param name="id"></param>
         /// <returns></returns>
         [OperationContract]
-        void Result(byte[] id);
+        void ResultAsync(byte[] id);
     }
 }

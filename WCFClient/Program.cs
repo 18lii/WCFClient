@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Data;
+using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using TransparentAgent.BaseClient;
@@ -15,6 +16,11 @@ namespace WCFClientConsole
         static void Main(string[] args)
         {
             WCFPorxy client = new WCFPorxy();
+            //var context = new InstanceContext(new WcfCallback());
+            //var factory = new DuplexChannelFactory<IService>(context, "net.tcp://127.0.0.1:8700/DataExchangeService");
+            //var client = factory.CreateChannel();
+            //client.ResultAsync(Guid.NewGuid());
+            Console.ReadKey();
             Console.WriteLine("服务已启动");
             var str = "select top 1000 * from t_item";
             DateTime t1Start;
@@ -42,12 +48,12 @@ namespace WCFClientConsole
             //    t2Finish = DateTime.Now;
             //    Console.WriteLine("任务2结束时间：{0}", t2Finish.ToString());
             //});
-            var max = 16;
+            var max = 1;
             var tList = new Thread[max];
             var iList = new Tuple<int, object, DateTime>[max];
             var iSignal = new AutoResetEvent[max];
             var ids = new Guid[max];
-            Console.ReadLine();
+            //Console.ReadLine();
             Parallel.For(0, iSignal.Length, i =>
             {
                 Thread.Sleep(i + 100);
@@ -67,12 +73,11 @@ namespace WCFClientConsole
             Thread.Sleep(2000);
             for(var i = 0; i < ids.Length; i++)
             {
-                client.Result(ids[i]);
+                client.ResultAsync(ids[i], new WcfCallback());
 
-                var tb = ((DataTable)result.AppendData);
                 t1Finish = DateTime.Now;
-                iList[i] = new Tuple<int, object, DateTime>(tb.Rows.Count, tb, t1Finish);
-                Console.WriteLine("任务{0}结束时间：{1}， 共计：{2}条记录", i, iList[i].Item3, iList[i].Item1);
+                //iList[i] = new Tuple<int, object, DateTime>(tb.Rows.Count, tb, t1Finish);
+                //Console.WriteLine("任务{0}结束时间：{1}， 共计：{2}条记录", i, iList[i].Item3, iList[i].Item1);
             }
             //var result = await client.Result(ss);
             //var tb = result.AppendData as DataTable;
@@ -90,15 +95,15 @@ namespace WCFClientConsole
 
 
             Console.ReadKey();
-            client.Close();
+            //client.Close();
             Console.WriteLine("服务已关闭，按任意键退出......");
         }
     }
     public class WcfCallback: ICallback
     {
-        public void Result(byte[] value)
+        public void Result(Guid id, AsyncCallback callback)
         {
-
+            Console.WriteLine("我是回调");
         }
     }
     public class WCFPorxy : AgentClient { }

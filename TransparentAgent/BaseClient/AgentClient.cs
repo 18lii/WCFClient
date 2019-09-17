@@ -233,9 +233,12 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public void Result(Guid id)
+        public void ResultAsync(Guid id, object callback)
         {
-            Channel.Result(id.Compression());
+            var context = new InstanceContext(callback);
+            var factory = new DuplexChannelFactory<IService>(context, "net.tcp://127.0.0.1:8700/DataExchangeService");
+            var client = factory.CreateChannel();
+            client.ResultAsync(id.Compression());
         }
     }
 }

@@ -29,6 +29,6 @@ namespace TransparentAgent.Interface
         Guid AdapterGetAsync(IContractData data);
         IServiceResult AdapterSet(IContractData data);
         Guid AdapterSetAsync(IContractData data);
-        void Result(Guid id);
+        void ResultAsync(Guid id, object callback);
     }
 }
