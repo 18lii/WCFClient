@@ -233,9 +233,9 @@ namespace TransparentAgent.BaseClient
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IServiceResult Result(Guid id)
+        public void Result(Guid id)
         {
-            return Channel.Result(id.Compression()).Decompress<IServiceResult>();
+            Channel.Result(id.Compression());
         }
     }
 }

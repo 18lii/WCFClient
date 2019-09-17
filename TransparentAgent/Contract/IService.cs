@@ -156,6 +156,6 @@ namespace TransparentAgent.Contract
         /// <param name="id"></param>
         /// <returns></returns>
         [OperationContract]
-        byte[] Result(byte[] id);
+        void Result(byte[] id);
     }
 }

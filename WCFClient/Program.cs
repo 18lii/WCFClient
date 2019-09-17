@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TransparentAgent.BaseClient;
 using TransparentAgent.Contract;
 using TransparentAgent.Infrastructure;
+using TransparentAgent.Interface;
 
 namespace WCFClientConsole
 {
@@ -66,7 +67,7 @@ namespace WCFClientConsole
             Thread.Sleep(2000);
             for(var i = 0; i < ids.Length; i++)
             {
-                var result = client.Result(ids[i]);
+                client.Result(ids[i]);
 
                 var tb = ((DataTable)result.AppendData);
                 t1Finish = DateTime.Now;
@@ -91,6 +92,13 @@ namespace WCFClientConsole
             Console.ReadKey();
             client.Close();
             Console.WriteLine("服务已关闭，按任意键退出......");
+        }
+    }
+    public class WcfCallback: ICallback
+    {
+        public void Result(byte[] value)
+        {
+
         }
     }
     public class WCFPorxy : AgentClient { }

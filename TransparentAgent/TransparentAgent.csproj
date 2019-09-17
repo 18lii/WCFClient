@@ -50,6 +50,7 @@
     <Compile Include="Infrastructure\DESCryptogramExtensions.cs" />
     <Compile Include="Infrastructure\CompressionExtensions.cs" />
     <Compile Include="Infrastructure\Enums.cs" />
+    <Compile Include="Interface\ICallback.cs" />
     <Compile Include="Interface\IClientBase.cs" />
     <Compile Include="Interface\IContractData.cs" />
     <Compile Include="Interface\IServiceResult.cs" />
